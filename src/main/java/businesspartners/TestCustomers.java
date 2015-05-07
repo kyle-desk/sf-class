@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import addresses.Addressable;
 
@@ -51,6 +52,17 @@ public class TestCustomers {
 		System.out.println("ps is a " + ps.getClass().getName());
 		System.out.println("ps is" + (ps instanceof Predicate ? "":" not") + " a Predicate");
 
+		lc.stream().filter(c->c.getCity().equals("San Francisco")).forEach(c->System.out.println(c));
+		long howMany = lc.stream().filter(c->c.getCity().equals("San Francisco")).count();
+		System.out.println("There are " + howMany + " Customers in SF");
+		List<Customer> lc2 = lc.stream().filter(c->c.getCity().equals("San Francisco")).collect(Collectors.toList());
+		System.out.println("LC2 is " + lc2);
+		
+		lc.stream()
+			.filter(c->c.getCity().equals("San Francisco"))
+			.map(c -> c.getStreet())
+			.sorted((s1,s2)->s1.compareTo(s2))
+			.forEach(c->System.out.println(c));
 	}
 
 }
