@@ -24,7 +24,14 @@ public class Customer implements Addressable, Comparable<Customer>{
 	public int getZip() {
 		return zip;
 	}
+	
+	public long getTotalSpend() {
+		return totalSpend;
+	}
 
+	public void addSpending(long s) {
+		totalSpend += s;
+	}
 
 	@Override
 	public String toString() {

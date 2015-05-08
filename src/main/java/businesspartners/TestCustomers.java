@@ -3,6 +3,7 @@ package businesspartners;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -63,5 +64,18 @@ public class TestCustomers {
 			.map(c -> c.getStreet())
 			.sorted((s1,s2)->s1.compareTo(s2))
 			.forEach(c->System.out.println(c));
+		
+		Customer result = lc.stream()
+			.collect(
+					()->new Customer("", "", 0, 0),
+					(bucket,cust)->bucket.addSpending(cust.getTotalSpend()),
+					(b1,b2)->b2.addSpending(b2.getTotalSpend())
+			);
+		System.out.println("Total spend of all customers is " + result.getTotalSpend());
+		
+		Optional<Long> total = lc.stream()
+				.map(c->c.getTotalSpend())
+				.reduce((a,b)->a+b);
+		total.ifPresent(l->System.out.println("Total is " + l));
 	}
 }
