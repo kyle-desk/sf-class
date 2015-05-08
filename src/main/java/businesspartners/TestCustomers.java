@@ -3,6 +3,7 @@ package businesspartners;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -77,5 +78,19 @@ public class TestCustomers {
 				.map(c->c.getTotalSpend())
 				.reduce((a,b)->a+b);
 		total.ifPresent(l->System.out.println("Total is " + l));
+		
+		Long totalLong = lc.stream()
+		.mapToLong(c->c.getTotalSpend())
+		.sum();
+		System.out.println("TotalLong is " + totalLong);
+		
+		Map<Integer, List<Customer>> map = lc.stream()
+				.collect(Collectors.groupingBy(c->c.getZip()));
+		map.forEach((k,v)->System.out.println("Key " + k + " has " + v));
+
+		Map<Integer, Long> map2 = lc.stream()
+				.collect(Collectors.groupingBy(c->c.getZip(), Collectors.counting()));
+		map2.forEach((k,v)->System.out.println("Key " + k + " has " + v));
+
 	}
 }
