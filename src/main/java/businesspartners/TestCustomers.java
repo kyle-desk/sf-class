@@ -64,5 +64,4 @@ public class TestCustomers {
 			.sorted((s1,s2)->s1.compareTo(s2))
 			.forEach(c->System.out.println(c));
 	}
-
 }
