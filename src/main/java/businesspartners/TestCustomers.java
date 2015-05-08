@@ -50,6 +50,11 @@ public class TestCustomers {
 		
 		lc.forEach(c-> System.out.println(">" + c.getAddressLabel()));
 		
+		lc.stream()
+		.map(c->c.getStreet())
+		.forEach(System.out::println);
+		
+		
 		Predicate<String> ps = s -> s.length() > 4;
 		System.out.println("ps is a " + ps.getClass().getName());
 		System.out.println("ps is" + (ps instanceof Predicate ? "":" not") + " a Predicate");
